@@ -66,6 +66,3 @@ The repository includes `sample_data.csv` with example emissions data to help yo
 
 Try it now: [Carbon Compass Demo](https://ngopire1.github.io/Real-time-net-zero-roadmap-visualizer/)
 
-## 📝 License
-
-MIT License - Feel free to use and modify!
