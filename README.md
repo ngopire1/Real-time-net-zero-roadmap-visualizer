@@ -13,7 +13,7 @@ Files
 - `sample_data.csv` — example emissions timeseries
 
 Notes
-- This is a hackathon-friendly static demo that runs entirely in the browser. No backend required.
+- This is a static demo that runs entirely in the browser. No backend required.
 # Carbon Compass: Real-Time Net-Zero Roadmap Visualizer
 
 A dynamic, interactive dashboard that helps companies visualize and plan their journey to net-zero emissions using science-based targets.
