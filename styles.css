@@ -1,9 +1,6 @@
 :root {
   --bg: #0f1720;
-  --card: #0b1220;
-}
-
-.panel-group {
+  --card: #0b1220.panel-group {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 16px;
