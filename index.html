@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.1.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>tle>Carbon Compass — Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Carbon Compass</h1>
+      <div class="panel-group">
+        <div class="panel">
+          <h3>Emissions Profile</h3>
+          <form id="input-form">
+            <div class="input-group">
+              <label>Current footprint (tons CO₂):
+                <div class="input-with-help">
+                  <input type="number" id="current" value="100000" step="1" min="0" required>
+                  <span class="help-text">Your organization's current carbon emissions</span>
+                </div>
+              </label>
+              
+              <label>Yearly reduction (%):
+                <div class="input-with-help">
+                  <input type="number" id="reduction" value="5" step="0.1" min="0" max="100">
+                  <span class="help-text">Annual emissions reduction target</span>
+                </div>
+              </label>
+              
+              <label>Years to net-zero:
+                <div class="input-with-help">
+                  <input type="number" id="years" value="20" step="1" min="1">
+                  <span class="help-text">Timeline to achieve net-zero emissions</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="input-group">
+              <label>Primary sector:
+                <select id="sector">
+                  <option value="high-impact">Energy & Heavy Industry</option>
+                  <option value="medium-impact">Light Manufacturing</option>
+                  <option value="low-impact">Services & Technology</option>
+                </select>
+              </label>
+              
+              <label>Emissions scope:
+                <select id="scope">
+                  <option value="1">Scope 1 (Direct)</option>
+                  <option value="2">Scope 2 (Energy)</option>
+                  <option value="3">Scope 3 (Value Chain)</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="input-group">
+              <label>Historical data (optional):
+                <div class="file-upload">
+                  <input type="file" id="csvfile" accept=".csv">
+                  <span class="help-text">Upload CSV with year,emissions columns</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="buttons">
+              <button id="simulate" type="button" class="primary">Simulate Pathway</button>
+              <button id="save" type="button">Save Plan</button>
+              <button id="load" type="button">Load Plan</button>
+              <button id="report" type="button">Generate Report</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel validation-panel">
+          <h3>Target Validation</h3>
+          <div id="meter" class="meter">
+            <div class="meter-label">Plan Feasibility</div>
+            <div id="meter-value" class="meter-value">—</div>
+          </div>
+          <div id="validation-details" class="validation-details">
+            <div class="metric">
+              <label>2030 Reduction:</label>
+              <span id="reduction-2030">—</span>
+            </div>
+            <div class="metric">
+              <label>Near-term Rate:</label>
+              <span id="near-term-rate">—</span>
+            </div>
+            <div class="metric">
+              <label>Long-term Rate:</label>
+              <span id="long-term-rate">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-panel">
+        <div class="chart-container">
+          <canvas id="roadmap" width="800" height="240"></canvas>
+        </div>
+        
+        <div class="scenario">
+          <label>Apply scenario: renewables switch (% next year): <input type="number" id="renewables" value="0" min="0" max="100"></label>
+          <button id="apply-scenario" type="button">Apply</button>
+        </div>
+      </div>
+
+      <div class="chart-panel">
+        <div class="chart-container">
+          <canvas id="roadmap" width="800" height="240"></canvas>
+        </div>
+        
+        <div class="scenarios-panel">
+          <h3>Scenario Planning</h3>
+          
+          <div class="scenario-list" id="scenario-list">
+            <!-- Active scenarios will appear here -->
+          </div>
+
+          <div class="scenario-editor">
+            <div class="scenario-inputs">
+              <label>
+                Scenario Name:
+                <input type="text" id="scenario-name" placeholder="e.g., Renewable Energy Switch">
+              </label>
+
+              <div class="intervention-group">
+                <label>
+                  Intervention Type:
+                  <select id="intervention-type">
+                    <option value="renewable">Switch to Renewable Energy</option>
+                    <option value="efficiency">Improve Energy Efficiency</option>
+                    <option value="transport">Optimize Transportation</option>
+                    <option value="custom">Custom Reduction</option>
+                  </select>
+                </label>
+
+                <label>
+                  Impact (%):
+                  <input type="number" id="intervention-impact" value="20" min="0" max="100" step="5">
+                </label>
+
+                <label>
+                  Apply From Year:
+                  <select id="intervention-year">
+                    <!-- Years will be populated by JS -->
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="scenario-actions">
+              <button id="add-scenario" type="button" class="primary">Add Scenario</button>
+              <button id="clear-scenarios" type="button">Clear All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>Demo — no backend. Uses Chart.js for visualization.</footer>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.1.0"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
